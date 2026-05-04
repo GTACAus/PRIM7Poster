@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Scientific Poster Interactive</title>
+
+<!-- Figtree Font -->
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+    font-family: 'Figtree', sans-serif;
+    background: #d8e3ea;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Layout */
+.container {
+    max-width: 1100px;
+    margin: auto;
+}
+
+/* Button styles */
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    margin: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 20px;
+    transition: 0.2s;
+}
+
+.button:hover {
+    transform: scale(1.05);
+}
+
+/* Color styles */
+.yellow { background: #ffd500; }
+.orange { background: #ff6b3d; color: white; }
+.purple { background: #5a4bff; color: white; }
+.pink { background: #e48ab0; }
+.green { background: #2ecc71; color: white; }
+.lilac { background: #b9a7e6; }
+
+/* Sizes */
+.title {
+    font-size: 28px;
+    padding: 25px;
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.half {
+    width: 48%;
+}
+
+.third {
+    width: 30%;
+}
+
+/* Modal popup */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+    position: relative;
+    width: 80%;
+    height: 80%;
+    margin: 5% auto;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.modal iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- TITLE -->
+    <div class="button yellow title" onclick="openModal('page1.html')">
+        Title - A Scientific Question
+    </div>
+
+    <!-- MAIN GRID -->
+    <div class="grid">
+
+        <!-- LEFT SIDE -->
+        <div class="half">
+            <div class="button orange" onclick="openModal('intro.html')">
+                WRITING AN INTRODUCTION
+            </div>
+
+            <div class="button orange" onclick="openModal('diagram.html')">
+                DRAW A DIAGRAM
+            </div>
+
+            <div class="button lilac" onclick="openModal('variables.html')">
+                WHAT ARE VARIABLES?
+            </div>
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="half">
+            <div class="button purple" onclick="openModal('tables.html')">
+                CONSTRUCTING TABLES
+            </div>
+
+            <div class="button purple" onclick="openModal('graphs.html')">
+                CONSTRUCTING GRAPHS
+            </div>
+
+            <div class="button pink" onclick="openModal('results.html')">
+                HOW TO SUMMARISE RESULTS
+            </div>
+        </div>
+
+    </div>
+
+    <!-- BOTTOM ROW -->
+    <div class="grid">
+        <div class="button green third" onclick="openModal('research.html')">
+            HOW TO RESEARCH
+        </div>
+
+        <div class="button green third" onclick="openModal('connecting.html')">
+            CONNECTING RESEARCH
+        </div>
+
+        <div class="button green third" onclick="openModal('next.html')">
+            WHAT NEXT?
+        </div>
+    </div>
+
+</div>
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <iframe id="iframe"></iframe>
+    </div>
+</div>
+
+<script>
+function openModal(page) {
+    document.getElementById("modal").style.display = "block";
+    document.getElementById("iframe").src = page;
+}
+
+function closeModal() {
+    document.getElementById("modal").style.display = "none";
+    document.getElementById("iframe").src = "";
+}
+</script>
+
+</body>
+</html>
