@@ -1,188 +1,482 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
 <title>Scientific Poster Interactive</title>
 
-<!-- Figtree Font -->
-<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- FIGTREE FONT -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-body {
-    font-family: 'Figtree', sans-serif;
-    background: #d8e3ea;
-    margin: 0;
-    padding: 20px;
+
+*{
+    box-sizing:border-box;
 }
 
-/* Layout */
-.container {
-    max-width: 1100px;
-    margin: auto;
+body{
+    margin:0;
+    background:#d7e7f0;
+    font-family:'Figtree', sans-serif;
+    color:#111;
 }
 
-/* Button styles */
-.button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 20px;
-    margin: 10px;
-    cursor: pointer;
-    font-weight: 600;
-    border-radius: 20px;
-    transition: 0.2s;
+.poster{
+    width:1000px;
+    margin:0 auto;
+    padding:30px 20px 50px;
 }
 
-.button:hover {
-    transform: scale(1.05);
+/* =====================================================
+TITLE
+===================================================== */
+
+.title-wrapper{
+    display:flex;
+    justify-content:center;
+    margin-bottom:40px;
 }
 
-/* Color styles */
-.yellow { background: #ffd500; }
-.orange { background: #ff6b3d; color: white; }
-.purple { background: #5a4bff; color: white; }
-.pink { background: #e48ab0; }
-.green { background: #2ecc71; color: white; }
-.lilac { background: #b9a7e6; }
-
-/* Sizes */
-.title {
-    font-size: 28px;
-    padding: 25px;
+.title-btn{
+    position:relative;
+    width:960px;
+    height:90px;
+    border:none;
+    border-radius:32px;
+    background:#ffd500;
+    font-family:'Figtree', sans-serif;
+    font-size:26px;
+    font-weight:800;
+    cursor:pointer;
+    box-shadow:12px 12px 0 #000;
+    transition:.2s;
 }
 
-.grid {
-    display: flex;
-    flex-wrap: wrap;
+.title-btn:hover{
+    transform:translateY(-3px);
 }
 
-.half {
-    width: 48%;
+/* =====================================================
+SECTIONS
+===================================================== */
+
+.row{
+    display:flex;
+    gap:28px;
+    margin-bottom:28px;
 }
 
-.third {
-    width: 30%;
+.panel{
+    position:relative;
+    background:#f7f5f2;
+    border:3px solid #111;
+    border-radius:4px;
+    padding:80px 30px 30px;
 }
 
-/* Modal popup */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.6);
+/* section label tabs */
+
+.section-label{
+    position:absolute;
+    top:-26px;
+    left:18px;
+    min-width:260px;
+    padding:14px 34px;
+    border-radius:999px;
+    font-size:20px;
+    background:#ff6b3d;
+    border:2px solid #111;
 }
 
-.modal-content {
-    position: relative;
-    width: 80%;
-    height: 80%;
-    margin: 5% auto;
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
+.blue-label{
+    background:#2dc6ff;
 }
 
-.modal iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
+.pink-label{
+    background:#e78bb8;
 }
 
-.close {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 28px;
-    cursor: pointer;
+.purple-label{
+    background:#b6a0ef;
 }
+
+.green-label{
+    background:#4bc95f;
+}
+
+/* =====================================================
+COLUMN SIZES
+===================================================== */
+
+.left-col{
+    width:48%;
+}
+
+.right-col{
+    width:48%;
+}
+
+.variables{
+    width:48%;
+    height:320px;
+}
+
+.observations{
+    width:48%;
+    height:320px;
+}
+
+.bottom-panel{
+    width:100%;
+    padding-top:90px;
+}
+
+/* =====================================================
+SHAPES
+===================================================== */
+
+.shape-wrap{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:35px;
+    flex-wrap:wrap;
+}
+
+/* BUTTON RESET */
+
+.shape-btn{
+    border:none;
+    cursor:pointer;
+    font-family:'Figtree', sans-serif;
+    font-weight:800;
+    transition:.2s;
+    color:#111;
+}
+
+.shape-btn:hover{
+    transform:scale(1.04);
+}
+
+/* =====================================================
+ORANGE SHAPES
+===================================================== */
+.orange-shape,
+.purple-shape{
+    width:220px;
+    height:120px;
+    border-radius:20px;
+
+    font-size:18px;
+    line-height:1.3;
+
+    padding:20px;
+}
+
+.orange-shape{
+    background:#ff6b3d;
+    color:#111;
+}
+
+.purple-shape{
+    background:#4d37ff;
+    color:white;
+}
+
+/* =====================================================
+VARIABLE SHAPE
+===================================================== */
+
+.variable-shape{
+    width:220px;
+    height:120px;
+    background:#b6a0ef;
+    border-radius:20px;
+    font-size:20px;
+    padding:20px;
+}
+
+/* =====================================================
+PINK HEXAGON
+===================================================== */
+
+.hexagon{
+    width:220px;
+    height:120px;
+    background:#ea93bc;
+
+    clip-path:none;
+
+    border-radius:20px;
+
+    font-size:20px;
+    padding:20px;
+}
+
+/* =====================================================
+GREEN HEXAGONS
+===================================================== */
+
+.green-hex{
+    width:220px;
+    height:120px;
+    background:#08c56f;
+    color:#111;
+
+    clip-path:none;
+
+    border-radius:20px;
+
+    font-size:18px;
+    padding:20px;
+}
+
+.green-circle{
+    width:220px;
+    height:120px;
+    background:#08c56f;
+    border-radius:20px;
+    font-size:18px;
+    padding:20px;
+}
+
+/* =====================================================
+MODAL
+===================================================== */
+
+.modal{
+    display:none;
+    position:fixed;
+    z-index:9999;
+    inset:0;
+    background:rgba(0,0,0,.7);
+}
+
+.modal-content{
+    position:relative;
+    width:85%;
+    height:85%;
+    background:white;
+    margin:3% auto;
+    border-radius:18px;
+    overflow:hidden;
+}
+
+.close{
+    position:absolute;
+    right:20px;
+    top:10px;
+    z-index:10;
+    font-size:40px;
+    cursor:pointer;
+    font-weight:700;
+}
+
+iframe{
+    width:100%;
+    height:100%;
+    border:none;
+}
+
+/* =====================================================
+TEXT
+===================================================== */
+
+.center{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
 </style>
 </head>
-
 <body>
 
-<div class="container">
+<div class="poster">
 
     <!-- TITLE -->
-    <div class="button yellow title" onclick="openModal('page1.html')">
-        Title - A Scientific Question
+    <div class="title-wrapper">
+        <button class="title-btn"
+        onclick="openModal('title.html')">
+            TITLE - A SCIENTIFIC QUESTION
+        </button>
     </div>
 
-    <!-- MAIN GRID -->
-    <div class="grid">
+    <!-- TOP ROW -->
+    <div class="row">
 
-        <!-- LEFT SIDE -->
-        <div class="half">
-            <div class="button orange" onclick="openModal('intro.html')">
-                WRITING AN INTRODUCTION
+        <!-- LEFT -->
+        <div class="panel left-col">
+
+            <div class="section-label">
+                Background information
             </div>
 
-            <div class="button orange" onclick="openModal('diagram.html')">
-                DRAW A DIAGRAM
+            <div class="shape-wrap">
+
+                <button class="shape-btn orange-shape center"
+                onclick="openModal('introduction.html')">
+                    WRITING AN<br>INTRODUCTION
+                </button>
+
+                <button class="shape-btn orange-shape center"
+                onclick="openModal('diagram.html')">
+                    DRAW A<br>DIAGRAM
+                </button>
+
             </div>
 
-            <div class="button lilac" onclick="openModal('variables.html')">
-                WHAT ARE VARIABLES?
-            </div>
         </div>
 
-        <!-- RIGHT SIDE -->
-        <div class="half">
-            <div class="button purple" onclick="openModal('tables.html')">
-                CONSTRUCTING TABLES
+        <!-- RIGHT -->
+        <div class="panel right-col">
+
+            <div class="section-label blue-label">
+                Data and Graphs
             </div>
 
-            <div class="button purple" onclick="openModal('graphs.html')">
-                CONSTRUCTING GRAPHS
+            <div class="shape-wrap">
+
+                <button class="shape-btn purple-shape center"
+                onclick="openModal('tables.html')">
+                    CONSTRUCTING<br>TABLES
+                </button>
+
+                <button class="shape-btn purple-shape center"
+                onclick="openModal('graphs.html')">
+                    CONSTRUCTING<br>GRAPHS
+                </button>
+
             </div>
 
-            <div class="button pink" onclick="openModal('results.html')">
-                HOW TO SUMMARISE RESULTS
-            </div>
         </div>
 
     </div>
 
-    <!-- BOTTOM ROW -->
-    <div class="grid">
-        <div class="button green third" onclick="openModal('research.html')">
-            HOW TO RESEARCH
+    <!-- MIDDLE ROW -->
+    <div class="row">
+
+        <!-- VARIABLES -->
+        <div class="panel variables">
+
+            <div class="section-label purple-label">
+                Variables
+            </div>
+
+            <div class="shape-wrap">
+
+                <button class="shape-btn variable-shape center"
+                onclick="openModal('variables.html')">
+                    WHAT ARE<br>VARIABLES?
+                </button>
+
+            </div>
+
         </div>
 
-        <div class="button green third" onclick="openModal('connecting.html')">
-            CONNECTING RESEARCH
+        <!-- OBSERVATIONS -->
+        <div class="panel observations">
+
+            <div class="section-label pink-label">
+                Our observations
+            </div>
+
+            <div class="shape-wrap">
+
+                <button class="shape-btn hexagon center"
+                onclick="openModal('results.html')">
+                    HOW TO<br>SUMMARISE<br>RESULTS
+                </button>
+
+            </div>
+
         </div>
 
-        <div class="button green third" onclick="openModal('next.html')">
-            WHAT NEXT?
+    </div>
+
+    <!-- BOTTOM -->
+    <div class="panel bottom-panel">
+
+        <div class="section-label green-label">
+            What we learned from further research:
         </div>
+
+        <div class="shape-wrap">
+
+            <button class="shape-btn green-hex center"
+            onclick="openModal('research.html')">
+                HOW TO<br>RESEARCH
+            </button>
+
+            <button class="shape-btn green-circle center"
+            onclick="openModal('connecting.html')">
+                CONNECTING<br>RESEARCH
+            </button>
+
+            <button class="shape-btn green-hex center"
+            onclick="openModal('next.html')">
+                WHAT<br>NEXT?
+            </button>
+
+        </div>
+
     </div>
 
 </div>
 
-<!-- MODAL -->
+<!-- =====================================================
+MODAL POPUP
+===================================================== -->
+
 <div id="modal" class="modal">
+
     <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <iframe id="iframe"></iframe>
+
+        <span class="close" onclick="closeModal()">
+            &times;
+        </span>
+
+        <iframe id="popup-frame"></iframe>
+
     </div>
+
 </div>
 
 <script>
-function openModal(page) {
+
+function openModal(page){
+
     document.getElementById("modal").style.display = "block";
-    document.getElementById("iframe").src = page;
+
+    document.getElementById("popup-frame").src = page;
+
 }
 
-function closeModal() {
+function closeModal(){
+
     document.getElementById("modal").style.display = "none";
-    document.getElementById("iframe").src = "";
+
+    document.getElementById("popup-frame").src = "";
+
 }
+
+/* close if clicking outside */
+
+window.onclick = function(event){
+
+    const modal = document.getElementById("modal");
+
+    if(event.target == modal){
+
+        closeModal();
+
+    }
+}
+
 </script>
 
 </body>
