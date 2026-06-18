@@ -192,7 +192,7 @@ VARIABLE SHAPE
 
 .variable-shape{
     width:220px;
-    height:120px;
+    height:90px;
     background:#b6a0ef;
     border-radius:20px;
     font-size:20px;
@@ -281,6 +281,15 @@ iframe{
     border:none;
 }
 
+/* image inside modal */
+#popup-image{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    display:none;
+    background:#fff;
+}
+
 /* =====================================================
 TEXT
 ===================================================== */
@@ -301,7 +310,7 @@ TEXT
     <!-- TITLE -->
     <div class="title-wrapper">
         <button class="title-btn"
-        onclick="openModal('title.html')">
+        onclick="openImageModal('Student - Question.png')">
             WRITE AN INVESTIGATION QUESTION
         </button>
     </div>
@@ -319,13 +328,13 @@ TEXT
             <div class="shape-wrap">
 
                 <button class="shape-btn orange-shape center"
-                onclick="openModal('introduction.html')">
+                onclick="openImageModal('Student - Writing an Introduction.png')">
                     WRITING AN<br>INTRODUCTION
                 </button>
 
                 <button class="shape-btn orange-shape center"
-                onclick="openModal('diagram.html')">
-                    DRAW A<br>DIAGRAM
+                onclick="openImageModal('Student - Writing a Prediction.png')">
+                    MAKING A<br>PREDICTION
                 </button>
 
             </div>
@@ -342,12 +351,12 @@ TEXT
             <div class="shape-wrap">
 
                 <button class="shape-btn purple-shape center"
-                onclick="openModal('tables.html')">
+                onclick="openImageModal('Student - Constructing Tables.png')">
                     CONSTRUCTING<br>TABLES
                 </button>
 
                 <button class="shape-btn purple-shape center"
-                onclick="openModal('graphs.html')">
+                onclick="openImageModal('Student - Constructing Graphs.png')">
                     CONSTRUCTING<br>GRAPHS
                 </button>
 
@@ -364,13 +373,18 @@ TEXT
         <div class="panel variables">
 
             <div class="section-label purple-label">
-                Variables
+                Experimental design
             </div>
 
             <div class="shape-wrap">
 
                 <button class="shape-btn variable-shape center"
-                onclick="openModal('variables.html')">
+                onclick="openImageModal('Student - Draw a Diagram.png')">
+                    DRAW A<br>DIAGRAM
+                </button>
+
+                <button class="shape-btn variable-shape center"
+                onclick="openImageModal('Student - Variables.png')">
                     WHAT ARE<br>VARIABLES?
                 </button>
 
@@ -388,7 +402,7 @@ TEXT
             <div class="shape-wrap">
 
                 <button class="shape-btn hexagon center"
-                onclick="openModal('results.html')">
+                onclick="openImageModal('Student - How to Summarise Results.png')">
                     HOW TO<br>SUMMARISE<br>RESULTS
                 </button>
 
@@ -408,17 +422,17 @@ TEXT
         <div class="shape-wrap">
 
             <button class="shape-btn green-hex center"
-            onclick="openModal('research.html')">
+            onclick="openImageModal('Student - How to Research.png')">
                 HOW TO<br>RESEARCH
             </button>
 
             <button class="shape-btn green-circle center"
-            onclick="openModal('connecting.html')">
+            onclick="openImageModal('Student - Connecting Research.png')">
                 CONNECTING<br>RESEARCH
             </button>
 
             <button class="shape-btn green-hex center"
-            onclick="openModal('next.html')">
+            onclick="openImageModal('Student - What Next.png')">
                 WHAT<br>NEXT?
             </button>
 
@@ -441,6 +455,7 @@ MODAL POPUP
         </span>
 
         <iframe id="popup-frame"></iframe>
+        <img id="popup-image" alt="">
 
     </div>
 
@@ -448,11 +463,29 @@ MODAL POPUP
 
 <script>
 
+/* open modal showing an HTML page in an iframe (kept for future use) */
 function openModal(page){
 
     document.getElementById("modal").style.display = "block";
 
+    document.getElementById("popup-frame").style.display = "block";
     document.getElementById("popup-frame").src = page;
+
+    document.getElementById("popup-image").style.display = "none";
+    document.getElementById("popup-image").src = "";
+
+}
+
+/* open modal showing an image */
+function openImageModal(imageSrc){
+
+    document.getElementById("modal").style.display = "block";
+
+    document.getElementById("popup-image").style.display = "block";
+    document.getElementById("popup-image").src = imageSrc;
+
+    document.getElementById("popup-frame").style.display = "none";
+    document.getElementById("popup-frame").src = "";
 
 }
 
@@ -461,6 +494,7 @@ function closeModal(){
     document.getElementById("modal").style.display = "none";
 
     document.getElementById("popup-frame").src = "";
+    document.getElementById("popup-image").src = "";
 
 }
 
