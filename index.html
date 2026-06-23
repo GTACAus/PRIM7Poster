@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<title>GTAC Scientific Poster Template</title>
+<title>GTAC Science Inquiry Poster</title>
 
 <!-- FIGTREE FONT -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,6 +23,142 @@ body{
     font-family:'Figtree', sans-serif;
     color:#111;
 }
+
+/* =====================================================
+LOGO BUTTON (top right)
+===================================================== */
+
+.logo-btn{
+    position:fixed;
+    top:18px;
+    right:28px;
+    z-index:500;
+    background:none;
+    border:none;
+    cursor:pointer;
+    padding:0;
+    transition:.2s;
+}
+
+.logo-btn:hover{
+    transform:scale(1.06);
+}
+
+.logo-btn img{
+    height:54px;
+    display:block;
+}
+
+/* =====================================================
+INSTRUCTIONS SIDEBAR (collapsible slide-out)
+===================================================== */
+
+.sidebar{
+    position:fixed;
+    right:0;
+    top:50%;
+    transform:translateY(-50%);
+    z-index:400;
+    display:flex;
+    flex-direction:row;
+    align-items:stretch;
+}
+
+/* the panel that slides in/out */
+.sidebar-drawer{
+    background:#fff9d6;
+    border:2px solid #111;
+    border-right:none;
+    border-radius:16px 0 0 16px;
+    padding:20px 16px 20px 20px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    box-shadow:-6px 6px 0 #111;
+    /* hidden off-screen to the right */
+    width:0;
+    overflow:hidden;
+    padding-left:0;
+    padding-right:0;
+    opacity:0;
+    transition: width .35s cubic-bezier(.4,0,.2,1),
+                opacity .25s ease,
+                padding .35s cubic-bezier(.4,0,.2,1);
+}
+
+.sidebar.open .sidebar-drawer{
+    width:190px;
+    opacity:1;
+    padding:20px 16px 20px 20px;
+}
+
+/* the yellow tab / toggle button */
+.sidebar-tab{
+    writing-mode:vertical-rl;
+    text-orientation:mixed;
+    transform:rotate(180deg);
+    background:#ffd500;
+    border:2px solid #111;
+    border-right:none;
+    border-radius:0 0 14px 14px;
+    padding:20px 11px;
+    font-family:'Figtree', sans-serif;
+    font-size:15px;
+    font-weight:800;
+    letter-spacing:.08em;
+    cursor:pointer;
+    color:#111;
+    box-shadow:-4px 4px 0 #111;
+    user-select:none;
+    flex-shrink:0;
+    transition:.2s;
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.sidebar-tab:hover{
+    background:#ffe94d;
+}
+
+/* little arrow indicator inside the tab */
+.sidebar-tab .tab-arrow{
+    display:inline-block;
+    font-size:12px;
+    transition:transform .35s;
+    /* arrow points left (towards panel) when closed */
+}
+
+.sidebar.open .sidebar-tab .tab-arrow{
+    transform:rotate(180deg);
+}
+
+.sidebar-btn{
+    background:#ffd500;
+    border:2px solid #111;
+    border-radius:10px;
+    font-family:'Figtree', sans-serif;
+    font-size:13px;
+    font-weight:700;
+    padding:10px 14px;
+    cursor:pointer;
+    text-align:left;
+    line-height:1.3;
+    width:150px;
+    white-space:normal;
+    transition:.15s;
+    box-shadow:3px 3px 0 #111;
+    flex-shrink:0;
+}
+
+.sidebar-btn:hover{
+    transform:translateX(-3px);
+    background:#ffe94d;
+}
+
+/* =====================================================
+POSTER
+===================================================== */
 
 .poster{
     width:1000px;
@@ -207,11 +343,8 @@ PINK HEXAGON
     width:220px;
     height:120px;
     background:#ea93bc;
-
     clip-path:none;
-
     border-radius:20px;
-
     font-size:20px;
     padding:20px;
 }
@@ -225,11 +358,8 @@ GREEN HEXAGONS
     height:120px;
     background:#08c56f;
     color:#111;
-
     clip-path:none;
-
     border-radius:20px;
-
     font-size:18px;
     padding:20px;
 }
@@ -244,7 +374,7 @@ GREEN HEXAGONS
 }
 
 /* =====================================================
-MODAL
+IMAGE MODAL
 ===================================================== */
 
 .modal{
@@ -291,6 +421,132 @@ iframe{
 }
 
 /* =====================================================
+SLIDESHOW MODAL
+===================================================== */
+
+#slideshow-modal{
+    display:none;
+    position:fixed;
+    z-index:9999;
+    inset:0;
+    background:rgba(0,0,0,.75);
+}
+
+.slideshow-content{
+    position:relative;
+    width:88%;
+    max-width:900px;
+    height:88%;
+    background:#fff;
+    margin:3% auto;
+    border-radius:20px;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+}
+
+/* close button */
+.slideshow-close{
+    position:absolute;
+    right:18px;
+    top:10px;
+    z-index:10;
+    font-size:40px;
+    cursor:pointer;
+    font-weight:700;
+    line-height:1;
+    color:#111;
+    background:none;
+    border:none;
+}
+
+/* image area */
+.slideshow-img-wrap{
+    flex:1;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px 70px;
+    overflow:hidden;
+}
+
+.slideshow-img-wrap img{
+    max-width:100%;
+    max-height:100%;
+    object-fit:contain;
+    border-radius:8px;
+}
+
+/* prev / next arrows */
+.slide-arrow{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    background:#ffd500;
+    border:2px solid #111;
+    border-radius:50%;
+    width:48px;
+    height:48px;
+    font-size:22px;
+    font-weight:800;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:3px 3px 0 #111;
+    transition:.15s;
+    z-index:5;
+}
+
+.slide-arrow:hover{
+    transform:translateY(-50%) scale(1.1);
+}
+
+.slide-arrow.prev{ left:12px; }
+.slide-arrow.next{ right:12px; }
+
+.slide-arrow:disabled{
+    opacity:.3;
+    cursor:default;
+}
+
+.slide-arrow:disabled:hover{
+    transform:translateY(-50%) scale(1);
+}
+
+/* dot indicators */
+.slide-dots{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    padding:14px 20px 20px;
+}
+
+.dot{
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    background:#ccc;
+    border:2px solid #111;
+    cursor:pointer;
+    transition:.15s;
+}
+
+.dot.active{
+    background:#ffd500;
+}
+
+/* counter label */
+.slide-counter{
+    text-align:center;
+    font-size:13px;
+    font-weight:600;
+    color:#666;
+    padding-bottom:4px;
+}
+
+/* =====================================================
 TEXT
 ===================================================== */
 
@@ -304,6 +560,46 @@ TEXT
 </style>
 </head>
 <body>
+
+<!-- LOGO BUTTON (top right) -->
+<button class="logo-btn" onclick="window.open('https://www.gtac.edu.au','_blank')">
+    <img src="gtac_primary_onyx.png" alt="GTAC logo">
+</button>
+
+<!-- INSTRUCTIONS SIDEBAR (collapsible) -->
+<div class="sidebar" id="sidebar">
+
+    <!-- sliding drawer with buttons -->
+    <div class="sidebar-drawer">
+
+        <button class="sidebar-btn"
+        onclick="openSlideshow(['Instructions - Design 1.png','Instructions - Design 2.png','Instructions - Design 3.png'])">
+            How to design your experiment
+        </button>
+
+        <button class="sidebar-btn"
+        onclick="openSlideshow(['Instructions - Boson 1.png','Instructions - Boson 2.png','Instructions - Boson 3.png'])">
+            How to use the Boson kit
+        </button>
+
+        <button class="sidebar-btn"
+        onclick="openSlideshow(['Instructions - Poster 1.png','Instructions - Poster 2.png','Instructions - Poster 3.png','Instructions - Poster 4.png'])">
+            How to complete your poster
+        </button>
+
+    </div>
+
+    <!-- tab that toggles the drawer -->
+    <button class="sidebar-tab" onclick="toggleSidebar()">
+        <span class="tab-arrow">&#8592;</span>
+        INSTRUCTIONS
+    </button>
+
+</div>
+
+<!-- =====================================================
+POSTER
+===================================================== -->
 
 <div class="poster">
 
@@ -443,7 +739,7 @@ TEXT
 </div>
 
 <!-- =====================================================
-MODAL POPUP
+IMAGE MODAL (single image)
 ===================================================== -->
 
 <div id="modal" class="modal">
@@ -461,55 +757,144 @@ MODAL POPUP
 
 </div>
 
+<!-- =====================================================
+SLIDESHOW MODAL (instructions)
+===================================================== -->
+
+<div id="slideshow-modal">
+
+    <div class="slideshow-content">
+
+        <button class="slideshow-close" onclick="closeSlideshow()">&times;</button>
+
+        <div class="slideshow-img-wrap">
+            <button class="slide-arrow prev" id="prev-btn" onclick="changeSlide(-1)">&#8592;</button>
+            <img id="slide-img" src="" alt="Instruction slide">
+            <button class="slide-arrow next" id="next-btn" onclick="changeSlide(1)">&#8594;</button>
+        </div>
+
+        <div class="slide-counter" id="slide-counter"></div>
+
+        <div class="slide-dots" id="slide-dots"></div>
+
+    </div>
+
+</div>
+
 <script>
 
-/* open modal showing an HTML page in an iframe (kept for future use) */
-function openModal(page){
+/* =====================================================
+SIDEBAR TOGGLE
+===================================================== */
 
-    document.getElementById("modal").style.display = "block";
-
-    document.getElementById("popup-frame").style.display = "block";
-    document.getElementById("popup-frame").src = page;
-
-    document.getElementById("popup-image").style.display = "none";
-    document.getElementById("popup-image").src = "";
-
+function toggleSidebar(){
+    document.getElementById("sidebar").classList.toggle("open");
 }
 
-/* open modal showing an image */
-function openImageModal(imageSrc){
+/* =====================================================
+SINGLE IMAGE MODAL
+===================================================== */
 
+function openModal(page){
     document.getElementById("modal").style.display = "block";
+    document.getElementById("popup-frame").style.display = "block";
+    document.getElementById("popup-frame").src = page;
+    document.getElementById("popup-image").style.display = "none";
+    document.getElementById("popup-image").src = "";
+}
 
+function openImageModal(imageSrc){
+    document.getElementById("modal").style.display = "block";
     document.getElementById("popup-image").style.display = "block";
     document.getElementById("popup-image").src = imageSrc;
-
     document.getElementById("popup-frame").style.display = "none";
     document.getElementById("popup-frame").src = "";
-
 }
 
 function closeModal(){
-
     document.getElementById("modal").style.display = "none";
-
     document.getElementById("popup-frame").src = "";
     document.getElementById("popup-image").src = "";
-
 }
-
-/* close if clicking outside */
 
 window.onclick = function(event){
-
     const modal = document.getElementById("modal");
+    if(event.target == modal) closeModal();
 
-    if(event.target == modal){
-
-        closeModal();
-
-    }
+    const ssModal = document.getElementById("slideshow-modal");
+    if(event.target == ssModal) closeSlideshow();
 }
+
+/* =====================================================
+SLIDESHOW MODAL
+===================================================== */
+
+let slideImages = [];
+let currentSlide = 0;
+
+function openSlideshow(images){
+    slideImages = images;
+    currentSlide = 0;
+    buildDots();
+    renderSlide();
+    document.getElementById("slideshow-modal").style.display = "block";
+}
+
+function closeSlideshow(){
+    document.getElementById("slideshow-modal").style.display = "none";
+    document.getElementById("slide-img").src = "";
+    slideImages = [];
+}
+
+function changeSlide(direction){
+    currentSlide = Math.max(0, Math.min(slideImages.length - 1, currentSlide + direction));
+    renderSlide();
+}
+
+function goToSlide(index){
+    currentSlide = index;
+    renderSlide();
+}
+
+function renderSlide(){
+    document.getElementById("slide-img").src = slideImages[currentSlide];
+
+    // counter
+    document.getElementById("slide-counter").textContent =
+        (currentSlide + 1) + " / " + slideImages.length;
+
+    // arrows
+    document.getElementById("prev-btn").disabled = currentSlide === 0;
+    document.getElementById("next-btn").disabled = currentSlide === slideImages.length - 1;
+
+    // dots
+    const dots = document.querySelectorAll(".dot");
+    dots.forEach((d, i) => d.classList.toggle("active", i === currentSlide));
+}
+
+function buildDots(){
+    const container = document.getElementById("slide-dots");
+    container.innerHTML = "";
+    slideImages.forEach((_, i) => {
+        const dot = document.createElement("button");
+        dot.className = "dot" + (i === 0 ? " active" : "");
+        dot.setAttribute("aria-label", "Go to slide " + (i + 1));
+        dot.onclick = () => goToSlide(i);
+        container.appendChild(dot);
+    });
+}
+
+/* keyboard navigation */
+document.addEventListener("keydown", function(e){
+    if(document.getElementById("slideshow-modal").style.display === "block"){
+        if(e.key === "ArrowLeft") changeSlide(-1);
+        if(e.key === "ArrowRight") changeSlide(1);
+        if(e.key === "Escape") closeSlideshow();
+    }
+    if(document.getElementById("modal").style.display === "block"){
+        if(e.key === "Escape") closeModal();
+    }
+});
 
 </script>
 
